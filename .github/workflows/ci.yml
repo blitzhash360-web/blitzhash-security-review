@@ -1,0 +1,29 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [18, 20, 22, 24]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm test
+      - name: Insecure demo produces ranked findings
+        run: |
+          node bin/security-review.mjs demo --out demo.md --no-color
+          grep -q "## 🔴 Critical" demo.md
+          grep -q "Stripe webhook does not verify the signature" demo.md
+          ! node bin/security-review.mjs demo --fail-on high --no-color > /dev/null
+      - name: Well-built fixture passes the strictest gate
+        run: node bin/security-review.mjs test/fixtures/secure-app --no-git --fail-on low
+      - name: This repo scans itself clean
+        run: node bin/security-review.mjs . --fail-on high --no-color

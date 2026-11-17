@@ -1,0 +1,19 @@
+{
+  "name": "blitzhash-security-review",
+  "version": "1.0.0",
+  "description": "Plain-English security audit for AI-built apps: secrets, auth, database access rules, input validation, rate limits, dependency vulns, CORS/headers and webhook signatures, ranked critical/high/medium with fixes. Read-only, zero dependencies.",
+  "type": "module",
+  "bin": { "security-review": "bin/security-review.mjs" },
+  "engines": { "node": ">=18.17" },
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "demo": "node bin/security-review.mjs demo"
+  },
+  "files": ["bin", "src", "skills", "examples", "README.md", "LICENSE"],
+  "keywords": ["security-audit", "security-scanner", "vibe-coding", "lovable", "supabase", "rls", "secrets", "nextjs", "agent-skills", "claude-code", "cursor"],
+  "author": "BlitzHash (https://blitzhash.com)",
+  "license": "MIT",
+  "homepage": "https://blitzhash.com",
+  "repository": { "type": "git", "url": "git+https://github.com/blitzhash360-web/blitzhash-security-review.git" },
+  "bugs": { "url": "https://github.com/blitzhash360-web/blitzhash-security-review/issues" }
+}
